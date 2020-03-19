@@ -1,3 +1,4 @@
+import AddTicket from './AddTicket/AddTicket';
 import Home from './Home/Home';
 
-export { Home };
+export { AddTicket, Home };

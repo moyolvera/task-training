@@ -1,54 +1,35 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import { NavigationContainer, RouteProp } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { AddTicket, Home } from '../containers';
+import { Icon } from 'native-base';
 
 type RootStackParamList = {
-  Home: undefined;
-  Dashboard: undefined;
+  Home: {
+    shouldReload: boolean;
+  };
+  AddTicket: undefined;
 };
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+export type HomePropNavigation = RouteProp<RootStackParamList, 'Home'>;
 
-type DashboardScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Dashboard'>;
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
-const HomeScreen = ({ navigation }: { navigation: HomeScreenNavigationProp }) => {
-  return (
-    <View style={styles.wrapper}>
-      <Text>Home Screen</Text>
-      <Button title="To dashboard" onPress={() => navigation.navigate('Dashboard')} />
-    </View>
-  );
-};
-
-const Dashboard = ({ navigation }: { navigation: DashboardScreenNavigationProp }) => {
-  return (
-    <View style={styles.wrapper}>
-      <Text>Dashboard</Text>
-      <Button title="To home" onPress={() => navigation.navigate('Home')} />
-    </View>
-  );
-};
-
-const Stack = createStackNavigator<RootStackParamList>();
-
-function AppNavigationContainer() {
+const AppNavigationContainer = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-      </Stack.Navigator>
+      <Tab.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          tabBarIcon: ({ focused }) => (
+            <Icon name="home" type="Feather" style={{ fontSize: 15, color: focused ? 'red' : 'black' }} />
+          ),
+        }}>
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="AddTicket" component={AddTicket} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default AppNavigationContainer;

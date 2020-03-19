@@ -1,4 +1,11 @@
 {
   "name": "training",
-  "displayName": "training"
+  "displayName": "training",
+  "android": {
+    "androidStatusBarColor": "#334393",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#334393"
+    }
+  }
 }
