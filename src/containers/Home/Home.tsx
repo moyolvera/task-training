@@ -1,49 +1,36 @@
 import React from 'react';
-import {
-  Container,
-  Header,
-  Title,
-  Content,
-  Left,
-  Button,
-  Icon,
-  Body,
-  Right,
-  Footer,
-  FooterTab,
-  Text,
-} from 'native-base';
 
 import useHome from './hooks/useHome';
 import { FlatList } from 'react-native';
+import Layout from '../../components/Layout/Layout';
+import { Text, View } from 'native-base';
+import { TodoItem } from 'declaration/types';
+import styles from './Home.styles';
 
 const Home = () => {
-  const { mockedData, title } = useHome();
+  const { todos, title } = useHome();
 
   return (
-    <Container>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon name="menu" type="Feather" />
-          </Button>
-        </Left>
-        <Body>
-          <Title>{title}</Title>
-        </Body>
-        <Right />
-      </Header>
-      <Content contentContainerStyle={{ padding: 20 }}>
-        <Text>{JSON.stringify(mockedData, null, 2)}</Text>
-      </Content>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>Footer</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
-    </Container>
+    <Layout title={title}>
+      <View style={styles.simpleFlex}>
+        <FlatList
+          data={todos}
+          renderItem={({ item }) => (
+            <View style={styles.itemWrapper}>
+              <View style={styles.row}>
+                <View style={styles.simpleFlex}>
+                  <Text>{item.id}</Text>
+                </View>
+                <View style={styles.simpleFlex}>
+                  <Text>{item.title}</Text>
+                </View>
+              </View>
+            </View>
+          )}
+          keyExtractor={(todo: TodoItem) => String(todo.id)}
+        />
+      </View>
+    </Layout>
   );
 };
 
