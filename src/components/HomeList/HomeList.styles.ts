@@ -15,12 +15,6 @@ const styles = StyleSheet.create({
   },
   simpleFlex: {
     flex: 1,
-    marginBottom: 20,
-  },
-  subtitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    paddingBottom: 20,
   },
 });
 
