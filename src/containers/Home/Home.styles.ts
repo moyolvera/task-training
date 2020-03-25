@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingBottom: 20,
   },
+  storage: {
+    height: 200,
+    maxHeight: 200,
+  },
 });
 
 export default styles;

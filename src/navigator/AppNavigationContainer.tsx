@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavigationContainer, RouteProp } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AddTicket, Home } from '../containers';
+import { AddTodo, Home } from '../containers';
 import { Icon } from 'native-base';
 
 type RootStackParamList = {
   Home: {
     shouldReload: boolean;
   };
-  AddTicket: undefined;
+  AddTodo: undefined;
 };
 
 export type HomePropNavigation = RouteProp<RootStackParamList, 'Home'>;
@@ -26,7 +26,7 @@ const AppNavigationContainer = () => {
           ),
         }}>
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="AddTicket" component={AddTicket} />
+        <Tab.Screen name="AddTodo" component={AddTodo} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import { useRoute } from '@react-navigation/core';
 
 import { HomePropNavigation } from 'navigator/AppNavigationContainer';
@@ -10,7 +11,18 @@ const useHome = () => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const route = useRoute<HomePropNavigation>();
 
+  const [storage, setStorage] = useState('');
+
   const todosService = new TodosService();
+
+  const checkStorage = async () => {
+    const data = await AsyncStorage.getItem('userData');
+
+    if (data) {
+      console.log(data);
+      setStorage(data);
+    }
+  };
 
   const requestTodos = async () => {
     const todos = await todosService.getAllTodos<TodoItem[]>();
@@ -21,6 +33,7 @@ const useHome = () => {
 
   useEffect(() => {
     requestTodos();
+    checkStorage();
   }, []);
 
   useEffect(() => {
@@ -30,8 +43,10 @@ const useHome = () => {
   }, [route]);
 
   return {
+    checkStorage,
     title,
     todos,
+    storage,
   };
 };
 
