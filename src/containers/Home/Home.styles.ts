@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
     height: 200,
     maxHeight: 200,
   },
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+  },
 });
 
 export default styles;
